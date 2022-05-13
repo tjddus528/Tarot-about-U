@@ -1,0 +1,286 @@
+warning: LF will be replaced by CRLF in build.gradle.
+The file will have its original line endings in your working directory
+[1mdiff --git a/build.gradle b/build.gradle[m
+[1mindex 8ee9051..39f2fdf 100644[m
+[1m--- a/build.gradle[m
+[1m+++ b/build.gradle[m
+[36m@@ -19,12 +19,27 @@[m [mrepositories {[m
+ }[m
+ [m
+ dependencies {[m
+[32m+[m	[32mimplementation 'org.jetbrains:annotations:19.0.0'[m
+[32m+[m
+[32m+[m	[32m//Web[m
+ 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'[m
+ 	implementation 'org.springframework.boot:spring-boot-starter-web'[m
+[31m-	compileOnly 'org.projectlombok:lombok'[m
+[32m+[m[32m    implementation 'org.springframework.boot:spring-boot-starter-jdbc'[m
+[32m+[m
+[32m+[m	[32m//lombok[m
+[32m+[m	[32mimplementation ('org.projectlombok:lombok')[m
+[32m+[m[32m    compileOnly 'org.projectlombok:lombok'[m
+[32m+[m	[32mannotationProcessor 'org.projectlombok:lombok'[m
+[32m+[m
+ 	developmentOnly 'org.springframework.boot:spring-boot-devtools'[m
+ 	runtimeOnly 'mysql:mysql-connector-java'[m
+[31m-	annotationProcessor 'org.projectlombok:lombok'[m
+[32m+[m
+[32m+[m	[32m// DB[m
+[32m+[m	[32mruntimeOnly ('mysql:mysql-connector-java:8.0.28') //mysql8[m
+[32m+[m	[32mimplementation ('org.springframework.boot:spring-boot-starter-jdbc:2.6.6')[m
+[32m+[m[32m//	compile('org.springframework.boot:spring-boot-starter-data-jpa') //mysql 5버전의 경우 삭제.[m
+[32m+[m
+[32m+[m	[32m//Spring Boot Starter[m
+ 	testImplementation 'org.springframework.boot:spring-boot-starter-test'[m
+ }[m
+ [m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/config/BaseException.java b/src/main/java/com/example/tarotaboutU/config/BaseException.java[m
+[1mindex e8bb939..9e44d80 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/config/BaseException.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/config/BaseException.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.example.demo.config;[m
+[32m+[m[32mpackage com.example.tarotaboutU.config;[m
+ [m
+ import lombok.AllArgsConstructor;[m
+ import lombok.Getter;[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/config/BaseResponse.java b/src/main/java/com/example/tarotaboutU/config/BaseResponse.java[m
+[1mindex d4f174f..cd7b430 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/config/BaseResponse.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/config/BaseResponse.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.example.demo.config;[m
+[32m+[m[32mpackage com.example.tarotaboutU.config;[m
+ [m
+ import com.fasterxml.jackson.annotation.JsonInclude;[m
+ import com.fasterxml.jackson.annotation.JsonProperty;[m
+[36m@@ -6,7 +6,8 @@[m [mimport com.fasterxml.jackson.annotation.JsonPropertyOrder;[m
+ import lombok.AllArgsConstructor;[m
+ import lombok.Getter;[m
+ [m
+[31m-import static com.example.demo.config.BaseResponseStatus.SUCCESS;[m
+[32m+[m[32mimport static com.example.tarotaboutU.config.BaseResponseStatus.SUCCESS;[m
+[32m+[m[32mimport static com.example.tarotaboutU.config.BaseResponseStatus.SUCCESS;[m
+ [m
+ @Getter[m
+ @AllArgsConstructor[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/config/BaseResponseStatus.java b/src/main/java/com/example/tarotaboutU/config/BaseResponseStatus.java[m
+[1mindex f7139d1..81cb168 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/config/BaseResponseStatus.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/config/BaseResponseStatus.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.example.demo.config;[m
+[32m+[m[32mpackage com.example.tarotaboutU.config;[m
+ [m
+ import lombok.Getter;[m
+ [m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/config/Constant.java b/src/main/java/com/example/tarotaboutU/config/Constant.java[m
+[1mindex c05c982..ee44a80 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/config/Constant.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/config/Constant.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.example.demo.config;[m
+[32m+[m[32mpackage com.example.tarotaboutU.config;[m
+ [m
+ public class Constant {[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/config/secret/Secret.java b/src/main/java/com/example/tarotaboutU/config/secret/Secret.java[m
+[1mindex a83cedc..28da919 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/config/secret/Secret.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/config/secret/Secret.java[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-package com.example.demo.config.secret;[m
+[32m+[m[32mpackage com.example.tarotaboutU.config.secret;[m
+ [m
+[31m-// TODO: 해당 KEY 값들을 꼭 바꿔서 사용해주세요![m
+[31m-// TODO: .gitignore에 추가하는거 앚지 마세요![m
+[32m+[m[32m// TODO: 해당 KEY 값들을 꼭 바꾸기[m
+[32m+[m[32m// TODO: .gitignore에 추가하기[m
+ public class Secret {[m
+[31m-    public static String JWT_SECRET_KEY = "UwKYibQQgkW7g-*k.ap9kje-wxBHb9wdXoBT4vnt4P3sJWt-Nu";[m
+[32m+[m[32m//    public static String JWT_SECRET_KEY = "UwKYibQQgkW7g-*k.ap9kje-wxBHb9wdXoBT4vnt4P3sJWt-Nu";[m
+   [m
+ }[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/src/user/UserController.java b/src/main/java/com/example/tarotaboutU/src/user/UserController.java[m
+[1mindex 4902c23..6f6a068 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/src/user/UserController.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/src/user/UserController.java[m
+[36m@@ -1,2 +1,48 @@[m
+[31m-package com.example.tarotaboutU.src.user;public class UserController {[m
+[32m+[m[32mpackage com.example.tarotaboutU.src.user;[m
+[32m+[m
+[32m+[m[32mimport com.example.tarotaboutU.config.BaseException;[m
+[32m+[m[32mimport com.example.tarotaboutU.config.BaseResponse;[m
+[32m+[m[32mimport com.example.tarotaboutU.src.user.model.GetUserRes;[m
+[32m+[m[32mimport org.slf4j.Logger;[m
+[32m+[m[32mimport org.slf4j.LoggerFactory;[m
+[32m+[m[32mimport org.springframework.beans.factory.annotation.Autowired;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.GetMapping;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.RequestMapping;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.ResponseBody;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.RestController;[m
+[32m+[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m[32m@RestController[m
+[32m+[m[32m@RequestMapping("/users")[m
+[32m+[m[32mpublic class UserController {[m
+[32m+[m[32m    final Logger logger = LoggerFactory.getLogger(this.getClass());[m
+[32m+[m
+[32m+[m[32m    @Autowired[m
+[32m+[m[32m    private final UserProvider userProvider;[m
+[32m+[m[32m    @Autowired[m
+[32m+[m[32m    private final UserService userService;[m
+[32m+[m
+[32m+[m[32m    public UserController(UserProvider userProvider, UserService userService) {[m
+[32m+[m[32m        this.userProvider = userProvider;[m
+[32m+[m[32m        this.userService = userService;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    /**[m
+[32m+[m[32m     * 회원 조회 API[m
+[32m+[m[32m     * [GET] /users[m
+[32m+[m[32m     */[m
+[32m+[m[32m    //Query String[m
+[32m+[m
+[32m+[m[32m    @ResponseBody[m
+[32m+[m[32m    @GetMapping("/list") // (GET) 127.0.0.1:9000/users[m
+[32m+[m[32m    public BaseResponse<List<GetUserRes>> getUsersList() {[m
+[32m+[m[32m        try{[m
+[32m+[m[32m            // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요![m
+[32m+[m[32m            List<GetUserRes> getUserResList = userProvider.getUserRes();[m
+[32m+[m[32m            return new BaseResponse<>(getUserResList);[m
+[32m+[m[32m        } catch(BaseException exception){[m
+[32m+[m[32m            return new BaseResponse<>((exception.getStatus()));[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/src/user/UserDao.java b/src/main/java/com/example/tarotaboutU/src/user/UserDao.java[m
+[1mindex 95c6a79..7dd648c 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/src/user/UserDao.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/src/user/UserDao.java[m
+[36m@@ -1,2 +1,32 @@[m
+[31m-package com.example.tarotaboutU.src.user;public class UserDao {[m
+[32m+[m[32mpackage com.example.tarotaboutU.src.user;[m
+[32m+[m
+[32m+[m[32mimport com.example.tarotaboutU.src.user.model.GetUserRes;[m
+[32m+[m[32mimport org.springframework.beans.factory.annotation.Autowired;[m
+[32m+[m[32mimport org.springframework.jdbc.core.JdbcTemplate;[m
+[32m+[m[32mimport org.springframework.stereotype.Repository;[m
+[32m+[m
+[32m+[m[32mimport javax.sql.DataSource;[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m[32m@Repository[m
+[32m+[m[32mpublic class UserDao {[m
+[32m+[m[32m    private JdbcTemplate jdbcTemplate;[m
+[32m+[m
+[32m+[m[32m    @Autowired[m
+[32m+[m[32m    public void setDataSource(DataSource dataSource){[m
+[32m+[m[32m        this.jdbcTemplate = new JdbcTemplate(dataSource);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public List<GetUserRes> getUsers(){[m
+[32m+[m[32m        String getUsersQuery = "select userIdx,name,nickName,email,phone from users";[m
+[32m+[m[32m        return this.jdbcTemplate.query(getUsersQuery,[m
+[32m+[m[32m                (rs,rowNum) -> new GetUserRes([m
+[32m+[m[32m                        rs.getInt("userIdx"),[m
+[32m+[m[32m                        rs.getString("name"),[m
+[32m+[m[32m                        rs.getString("nickName"),[m
+[32m+[m[32m                        rs.getString("email"),[m
+[32m+[m[32m                        rs.getString("phone")[m
+[32m+[m[32m                ));[m
+[32m+[m[32m    }[m
+[32m+[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/src/user/UserProvider.java b/src/main/java/com/example/tarotaboutU/src/user/UserProvider.java[m
+[1mindex 570a9e4..1762ee3 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/src/user/UserProvider.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/src/user/UserProvider.java[m
+[36m@@ -1,2 +1,37 @@[m
+[31m-package com.example.tarotaboutU.src.user;public class UserProvider {[m
+[32m+[m[32mpackage com.example.tarotaboutU.src.user;[m
+[32m+[m
+[32m+[m[32mimport com.example.tarotaboutU.config.BaseException;[m
+[32m+[m[32mimport com.example.tarotaboutU.src.user.model.GetUserRes;[m
+[32m+[m[32mimport org.slf4j.Logger;[m
+[32m+[m[32mimport org.slf4j.LoggerFactory;[m
+[32m+[m[32mimport org.springframework.stereotype.Service;[m
+[32m+[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m[32mimport static com.example.tarotaboutU.config.BaseResponseStatus.DATABASE_ERROR;[m
+[32m+[m
+[32m+[m[32m@Service[m
+[32m+[m[32mpublic class UserProvider {[m
+[32m+[m[32m    private final UserDao userDao;[m
+[32m+[m
+[32m+[m[32m    final Logger logger = LoggerFactory.getLogger(this.getClass());[m
+[32m+[m
+[32m+[m[32m    public UserProvider(UserDao userDao) {[m
+[32m+[m[32m        this.userDao = userDao;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    /**[m
+[32m+[m[32m     * 전체 유저리스트 조회[m
+[32m+[m[32m     * @return[m
+[32m+[m[32m     * @throws BaseException[m
+[32m+[m[32m     */[m
+[32m+[m[32m    public List<GetUserRes> getUserRes() throws BaseException{[m
+[32m+[m[32m        try{[m
+[32m+[m[32m            List<GetUserRes> getUserResList = userDao.getUsers();[m
+[32m+[m[32m            return getUserResList;[m
+[32m+[m[32m        } catch (Exception exception) {[m
+[32m+[m[32m            System.out.println("exception = " + exception);[m
+[32m+[m[32m            throw new BaseException(DATABASE_ERROR);[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m
+[41m+[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/src/user/UserService.java b/src/main/java/com/example/tarotaboutU/src/user/UserService.java[m
+[1mindex e337281..a217ddc 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/src/user/UserService.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/src/user/UserService.java[m
+[36m@@ -1,2 +1,18 @@[m
+[31m-package com.example.tarotaboutU.src.user;public class UserService {[m
+[32m+[m[32mpackage com.example.tarotaboutU.src.user;[m
+[32m+[m
+[32m+[m[32mimport org.slf4j.Logger;[m
+[32m+[m[32mimport org.slf4j.LoggerFactory;[m
+[32m+[m[32mimport org.springframework.stereotype.Service;[m
+[32m+[m
+[32m+[m[32m@Service[m
+[32m+[m[32mpublic class UserService {[m
+[32m+[m[32m    final Logger logger = LoggerFactory.getLogger(this.getClass());[m
+[32m+[m
+[32m+[m[32m    private final UserDao userDao;[m
+[32m+[m[32m    private final UserProvider userProvider;[m
+[32m+[m
+[32m+[m[32m    public UserService(UserDao userDao, UserProvider userProvider) {[m
+[32m+[m[32m        this.userDao = userDao;[m
+[32m+[m[32m        this.userProvider = userProvider;[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/tarotaboutU/src/user/model/GetUserRes.java b/src/main/java/com/example/tarotaboutU/src/user/model/GetUserRes.java[m
+[1mindex 67059ac..79af34f 100644[m
+[1m--- a/src/main/java/com/example/tarotaboutU/src/user/model/GetUserRes.java[m
+[1m+++ b/src/main/java/com/example/tarotaboutU/src/user/model/GetUserRes.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.example.demo.src.user.model;[m
+[32m+[m[32mpackage com.example.tarotaboutU.src.user.model;[m
+ [m
+ [m
+ import lombok.AllArgsConstructor;[m
+[1mdiff --git a/src/main/resources/application.properties b/src/main/resources/application.properties[m
+[1mindex 8d116bf..f213132 100644[m
+[1m--- a/src/main/resources/application.properties[m
+[1m+++ b/src/main/resources/application.properties[m
+[36m@@ -1 +1,6 @@[m
+[31m-server.port=9001[m
+\ No newline at end of file[m
+[32m+[m[32mserver.port=3000[m
+[32m+[m[32mspring.application.name=taro-about-U[m
+[32m+[m[32mspring.datasource.url=jdbc:mysql://database-1.c2uoaqog3naf.ap-northeast-2.rds.amazonaws.com/InstagramDB[m
+[32m+[m[32mspring.datasource.username=sungyeon[m
+[32m+[m[32mspring.datasource.password=anne3821[m
+[32m+[m[32mspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver[m
+\ No newline at end of file[m

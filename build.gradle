@@ -19,12 +19,27 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.jetbrains:annotations:19.0.0'
+
+	//Web
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	//lombok
+	implementation ('org.projectlombok:lombok')
+    compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok'
+
+	// DB
+	runtimeOnly ('mysql:mysql-connector-java:8.0.28') //mysql8
+	implementation ('org.springframework.boot:spring-boot-starter-jdbc:2.6.6')
+//	compile('org.springframework.boot:spring-boot-starter-data-jpa') //mysql 5버전의 경우 삭제.
+
+	//Spring Boot Starter
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
