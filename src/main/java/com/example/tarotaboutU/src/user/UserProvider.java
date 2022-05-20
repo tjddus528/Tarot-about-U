@@ -24,10 +24,19 @@ public class UserProvider {
      * @return
      * @throws BaseException
      */
-    public List<GetUserRes> getUserRes() throws BaseException{
+    public List<GetUserRes> getUserListRes() throws BaseException{
         try{
-            List<GetUserRes> getUserResList = userDao.getUsers();
+            List<GetUserRes> getUserResList = userDao.getUsersList();
             return getUserResList;
+        } catch (Exception exception) {
+            System.out.println("exception = " + exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+    public GetUserRes getUser(int userId) throws BaseException{
+        try{
+            GetUserRes getUserRes = userDao.getUser(userId);
+            return getUserRes;
         } catch (Exception exception) {
             System.out.println("exception = " + exception);
             throw new BaseException(DATABASE_ERROR);
