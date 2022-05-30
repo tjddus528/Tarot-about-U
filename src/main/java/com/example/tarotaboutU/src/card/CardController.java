@@ -77,7 +77,7 @@ public class CardController {
      */
     @ResponseBody
     @GetMapping("/set/{setId}") // (GET) 127.0.0.1:9000/users
-    public BaseResponse<GetCardSetRes> getThreeCard(@PathVariable("setId") String setId) {
+    public BaseResponse<GetCardSetRes> getThreeCard(@PathVariable("setId") int setId) {
         try{
             GetCardSetRes getCardSetRes = cardProvider.getThreeCard(setId);
             return new BaseResponse<>(getCardSetRes);

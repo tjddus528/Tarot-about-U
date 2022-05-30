@@ -2,15 +2,13 @@ package com.example.tarotaboutU.src.inventory;
 
 import com.example.tarotaboutU.config.BaseException;
 import com.example.tarotaboutU.config.BaseResponse;
-import com.example.tarotaboutU.src.inventory.model.GetInventoryRes;
-import com.example.tarotaboutU.src.inventory.model.GetTarotsPickedByUser;
-import com.example.tarotaboutU.src.inventory.model.PostTarotResultReq;
-import com.example.tarotaboutU.src.inventory.model.PostThreeTarotReq;
+import com.example.tarotaboutU.src.inventory.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -43,6 +41,27 @@ public class InventoryController {
         try{
             List<GetTarotsPickedByUser> getTarotsPickedByUserList = inventoryProvider.getInventoryRes(userId);
             return new BaseResponse<>(getTarotsPickedByUserList);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/tarot/{userId}")
+    public BaseResponse<List<GetTarotListRes>> getTarotList(@PathVariable("userId") int userId, @RequestParam int questionId, Date date){
+        try{
+            List<GetTarotListRes> getTarotListRes = inventoryProvider.getTarotListRes(userId, questionId, date);
+            return new BaseResponse<>(getTarotListRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+    @ResponseBody
+    @GetMapping("/set/{userId}")
+    public BaseResponse<List<GetSetListRes>> getTarotList(@PathVariable("userId") int userId, @RequestParam Date date){
+        try{
+            List<GetSetListRes> getSetListRes = inventoryProvider.getSetListRes(userId, date);
+            return new BaseResponse<>(getSetListRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }

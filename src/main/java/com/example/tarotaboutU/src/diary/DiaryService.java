@@ -25,7 +25,7 @@ public class DiaryService {
     public PostDiaryRes createDiary(int userId, PostDiaryReq postDiaryReq) throws BaseException {
         try{
             int diaryId = diaryDao.insertDiary(userId, postDiaryReq);
-            return new PostDiaryRes(diaryId);
+            return new PostDiaryRes(diaryId, userId);
         }
         catch (Exception exception) {
             System.out.println("exception = " + exception);
@@ -44,7 +44,7 @@ public class DiaryService {
             throw new BaseException(INVALID_TAROT_ID);
         }
         try{
-            int result = diaryDao.updateDiary(diaryId, patchDiaryReq.getContent());
+            int result = diaryDao.updateDiary(diaryId, patchDiaryReq);
             if (result == 0) {
                 throw new BaseException(MODIFY_FAIL_POST);
             }

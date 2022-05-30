@@ -1,6 +1,7 @@
 package com.example.tarotaboutU.src.diary;
 
 import com.example.tarotaboutU.src.diary.model.GetDiaryRes;
+import com.example.tarotaboutU.src.diary.model.PatchDiaryReq;
 import com.example.tarotaboutU.src.diary.model.PostDiaryReq;
 import com.example.tarotaboutU.src.diary.model.PostDiaryRes;
 import com.example.tarotaboutU.src.inventory.model.GetTarotsPickedByUser;
@@ -21,10 +22,11 @@ public class DiaryDao {
     }
 
     public int insertDiary(int userId, PostDiaryReq postDiaryReq) {
-        String insertDiaryQuery = "INSERT INTO diary (user_id, create_date, content, status) VALUES(?, ?, ?, ?) ";
+        String insertDiaryQuery = "INSERT INTO diary (user_id, create_date, title, content, status) VALUES(?, ?, ?, ?, ?) ";
         Object[] insertDiaryParam = new Object[]{
-                postDiaryReq.getUserId(),
+                userId,
                 postDiaryReq.getCreateDate(),
+                postDiaryReq.getTitle(),
                 postDiaryReq.getContent(),
                 "ACTIVE",
         };
@@ -35,7 +37,7 @@ public class DiaryDao {
     }
 
     public List<GetDiaryRes> selectDiary(int userId){
-        String selectDiaryQuery = "SELECT diary_id, user_id, create_date, content, status " +
+        String selectDiaryQuery = "SELECT diary_id, user_id, create_date, title, content, status " +
                 "FROM diary WHERE status='ACTIVE' and user_id=?;";
         int selectDiaryParam=userId;
         return this.jdbcTemplate.query(selectDiaryQuery,
@@ -43,6 +45,7 @@ public class DiaryDao {
                         rs.getInt("diary_id"),
                         rs.getInt("user_id"),
                         rs.getDate("create_date"),
+                        rs.getString("title"),
                         rs.getString("content"),
                         rs.getString("status")
                 ), selectDiaryParam);
@@ -64,9 +67,12 @@ public class DiaryDao {
                 checkDiaryExistParam);
 
     }
-    public int updateDiary(int diaryId, String content){
-        String updateDiaryQuery = "UPDATE diary SET content=? WHERE diary_id=?";
-        Object []updateDiaryParams = new Object[] {content, diaryId};
+    public int updateDiary(int diaryId, PatchDiaryReq patchDiaryReq){
+        String updateDiaryQuery = "UPDATE diary SET title=? , content=? WHERE diary_id=?";
+        Object []updateDiaryParams = new Object[] {
+                patchDiaryReq.getTitle(),
+                patchDiaryReq.getContent(),
+                diaryId};
         return this.jdbcTemplate.update(updateDiaryQuery, updateDiaryParams);
     }
     public int deleteDiary(int diaryId){

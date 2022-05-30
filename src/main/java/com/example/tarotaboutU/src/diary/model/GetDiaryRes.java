@@ -13,6 +13,7 @@ public class GetDiaryRes {
     private int diaryId;
     private int userId;
     private Date createDate;
+    private String title;
     private String content;
     private String status;
 }

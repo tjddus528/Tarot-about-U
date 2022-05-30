@@ -13,5 +13,6 @@ import java.sql.Date;
 public class PatchDiaryReq {
     private int diaryId;
     private int userId;
+    private String title;
     private String content;
 }

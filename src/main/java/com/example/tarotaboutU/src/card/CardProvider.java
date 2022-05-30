@@ -45,7 +45,7 @@ public class CardProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-    public GetCardSetRes getThreeCard(String setId) throws BaseException{
+    public GetCardSetRes getThreeCard(int setId) throws BaseException{
         try{
             GetCardSetRes getCardSetRes = cardDao.getThreeCard(setId);
             return getCardSetRes;

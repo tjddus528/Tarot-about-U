@@ -34,10 +34,11 @@ public class CardDao {
                 ));
     }
     public List<GetCardSetRes> getCardSetList(){
-        String getCardSetQuery = "select set_id, set_info, mind_tarot from tarot_set";
+        String getCardSetQuery = "select set_id, set_summary, set_info, mind_tarot from tarot_set";
         return this.jdbcTemplate.query(getCardSetQuery,
                 (rs,rowNum) -> new GetCardSetRes(
-                        rs.getString("set_id"),
+                        rs.getInt("set_id"),
+                        rs.getString("set_summary"),
                         rs.getString("set_info"),
                         rs.getString("mind_tarot")
                 ));
@@ -58,12 +59,13 @@ public class CardDao {
                         rs.getString("love_tarot")
                 ), getOneCardParam);
     }
-    public GetCardSetRes getThreeCard(String setId){
-        String getThreeCardQuery = "select set_id, set_info, mind_tarot from tarot_set where set_id = ?";
-        String getThreeCardParam = setId;
+    public GetCardSetRes getThreeCard(int setId){
+        String getThreeCardQuery = "select set_id, set_summary, set_info, mind_tarot from tarot_set where set_id = ?";
+        int getThreeCardParam = setId;
         return this.jdbcTemplate.queryForObject(getThreeCardQuery,
                 (rs,rowNum) -> new GetCardSetRes(
-                        rs.getString("set_id"),
+                        rs.getInt("set_id"),
+                        rs.getString("set_summary"),
                         rs.getObject("set_info"),
                         rs.getString("mind_tarot")
                 ), getThreeCardParam);

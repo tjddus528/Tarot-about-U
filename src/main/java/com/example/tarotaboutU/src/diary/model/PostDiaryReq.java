@@ -13,5 +13,6 @@ import java.util.Date;
 public class PostDiaryReq {
     private int userId;
     private Date createDate;
+    private String title;
     private String content;
 }

@@ -9,7 +9,8 @@ import org.apache.tomcat.util.json.JSONParser;
 @Setter
 @AllArgsConstructor
 public class GetCardSetRes {
-    private String setId;
-    private Object set_info;
-    private String mind_tarot;
+    private int setId;
+    private String setSummary;
+    private Object setInfo;
+    private String mindTarot;
 }

@@ -29,7 +29,6 @@ public class InventoryService {
             if (result == 0){
                 throw new BaseException(POST_FAIL_SAVE_TAROT);
             }
-            System.out.println("result(pick_id??) = " + result);
             this.addTarotToInventory(result, postTarotResultReq);
         } catch (Exception exception) {
             System.out.println("exception = " + exception);
@@ -59,7 +58,6 @@ public class InventoryService {
         }
         try{
             int result = inventoryDao.deleteTarotResult(pickId);
-            System.out.println("result = " + result);
             if (result == 0) {
                 throw new BaseException(MODIFY_FAIL_POST);
             }

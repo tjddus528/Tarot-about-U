@@ -11,4 +11,5 @@ import java.util.Date;
 @AllArgsConstructor
 public class PostDiaryRes {
     private int diaryId;
+    private int userid;
 }
