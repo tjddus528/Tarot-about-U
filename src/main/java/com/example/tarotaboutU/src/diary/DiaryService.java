@@ -38,7 +38,7 @@ public class DiaryService {
             throw new BaseException(USERS_EMPTY_USER_ID);
         }
         if(userIdx != patchDiaryReq.getUserId()) {
-            throw new BaseException(INVALID_USER_JWT);
+            throw new BaseException(INVALID_USER_ID);
         }
         if(diaryId != patchDiaryReq.getDiaryId()) {
             throw new BaseException(INVALID_TAROT_ID);
@@ -46,7 +46,7 @@ public class DiaryService {
         try{
             int result = diaryDao.updateDiary(diaryId, patchDiaryReq);
             if (result == 0) {
-                throw new BaseException(MODIFY_FAIL_POST);
+                throw new BaseException(MODIFY_FAIL_DIARY);
             }
         }
         catch (Exception exception) {
@@ -57,12 +57,12 @@ public class DiaryService {
     public void deleteDiary(int diaryId) throws BaseException {
 
         if(diaryProvider.checkDiaryExist(diaryId) == 0) {
-            throw new BaseException(POST_EMPTY_POST_ID);
+            throw new BaseException(POST_EMPTY_DIARY_ID);
         }
         try{
             int result = diaryDao.deleteDiary(diaryId);
             if (result == 0) {
-                throw new BaseException(MODIFY_FAIL_POST);
+                throw new BaseException(DELETE_FAIL_DIARY);
             }
         }
         catch (Exception exception) {

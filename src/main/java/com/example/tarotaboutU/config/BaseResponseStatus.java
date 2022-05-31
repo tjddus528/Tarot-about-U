@@ -18,10 +18,8 @@ public enum BaseResponseStatus {
      */
     // Common
     REQUEST_ERROR(false, 2000, "입력값을 확인해주세요."),
-    EMPTY_JWT(false, 2001, "JWT를 입력해주세요."),
-    INVALID_JWT(false, 2002, "유효하지 않은 JWT입니다."),
-    INVALID_USER_JWT(false,2003,"권한이 없는 유저의 접근입니다."),
-    INVALID_TAROT_ID(false,2004,"범위를 벗어난 타로ID입니다."),
+    INVALID_USER_ID(false,2003,"유저아이디가 일치하지 않습니다."),
+    INVALID_TAROT_ID(false,2004,"범위를 벗어난 타로아이디입니다."),
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
 
@@ -31,8 +29,9 @@ public enum BaseResponseStatus {
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
 
     POST_POSTS_INVALID_CONTENTS(false, 2018, "입력가능한 글자수를 초과했습니다."),
-    POST_POSTS_EMPTY_IMGURL(false,2019,"게시글의 이미지를 추가해주세요."),
-    POST_EMPTY_POST_ID(false, 2020, "존재하지 않는 게시글입니다."),
+    POST_POSTS_EMPTY_DIARY_TITLE(false,2019,"다이어리의 제목을 추가해주세요."),
+    POST_POSTS_EMPTY_DIARY_CONTENT(false,2019,"다이어리의 내용을 추가해주세요."),
+    POST_EMPTY_DIARY_ID(false, 2020, "존재하지 않는 다이어리 아이디입니다."),
 
     POST_USERS_EMPTY_PASSWORD(false, 2031, "비밀번호를 입력해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2032, "비밀번호 형식을 확인해주세요."),
@@ -46,7 +45,8 @@ public enum BaseResponseStatus {
     // [POST] /users
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
     FAILED_TO_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
-    MODIFY_FAIL_POST(false, 3020, "게시글 수정에 실패했습니다."),
+    MODIFY_FAIL_DIARY(false, 3020, "다이어리 수정에 실패했습니다."),
+    DELETE_FAIL_DIARY(false, 3020, "다이어리 삭제를 실패했습니다."),
     POST_FAIL_SAVE_TAROT(false, 3021, "타로카드결과 저장에 실패했습니다."),
     POST_FAIL_TAROT_INVENTORY(false, 3022, "보관함 추가에 실패했습니다."),
 
@@ -58,15 +58,7 @@ public enum BaseResponseStatus {
     SERVER_ERROR(false, 4001, "서버와의 연결에 실패하였습니다."),
 
     //[PATCH] /users/{userIdx}
-    MODIFY_FAIL_USERPROFILE(false,4014,"유저프로필 수정에 실패하였습니다."),
-
-    PASSWORD_ENCRYPTION_ERROR(false, 4011, "비밀번호 암호화에 실패하였습니다."),
-    PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다.");
-
-
-    // 5000 : 필요시 만들어서 쓰세요
-    // 6000 : 필요시 만들어서 쓰세요
-
+    MODIFY_FAIL_USERPROFILE(false,4014,"유저프로필 수정에 실패하였습니다.");
 
     private final boolean isSuccess;
     private final int code;

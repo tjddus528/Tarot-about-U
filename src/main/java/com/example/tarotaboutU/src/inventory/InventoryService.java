@@ -51,7 +51,7 @@ public class InventoryService {
     public void deleteTarotResult(int userId, int pickId) throws BaseException {
 
         if(inventoryProvider.checkTarotResultExist(pickId) == 0) {
-            throw new BaseException(POST_EMPTY_POST_ID);
+            throw new BaseException(POST_EMPTY_DIARY_ID);
         }
         if(inventoryDao.getUserIdByPickId(pickId) != userId) {
             throw new BaseException(INVALID_TAROT_ID);
@@ -59,7 +59,7 @@ public class InventoryService {
         try{
             int result = inventoryDao.deleteTarotResult(pickId);
             if (result == 0) {
-                throw new BaseException(MODIFY_FAIL_POST);
+                throw new BaseException(DELETE_FAIL_DIARY);
             }
         }
         catch (Exception exception) {
