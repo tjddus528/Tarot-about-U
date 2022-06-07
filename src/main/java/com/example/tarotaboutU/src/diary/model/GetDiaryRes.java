@@ -1,5 +1,6 @@
 package com.example.tarotaboutU.src.diary.model;
 
+import com.example.tarotaboutU.src.card.model.GetCardRes;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +17,8 @@ public class GetDiaryRes {
     private String title;
     private String content;
     private String status;
+    private String oneOrSet;
+    private int tarotId;
+    private int setId;
+    private int questionId;
 }

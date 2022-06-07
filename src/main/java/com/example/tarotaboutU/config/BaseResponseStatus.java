@@ -28,7 +28,7 @@ public enum BaseResponseStatus {
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
 
-    POST_POSTS_INVALID_CONTENTS(false, 2018, "입력가능한 글자수를 초과했습니다."),
+    POST_POSTS_INVALID_CONTENTS(false, 2018, "입력가능한 글자수 1000자를 초과했습니다."),
     POST_POSTS_EMPTY_DIARY_TITLE(false,2019,"다이어리의 제목을 추가해주세요."),
     POST_POSTS_EMPTY_DIARY_CONTENT(false,2019,"다이어리의 내용을 추가해주세요."),
     POST_EMPTY_DIARY_ID(false, 2020, "존재하지 않는 다이어리 아이디입니다."),

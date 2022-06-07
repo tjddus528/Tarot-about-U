@@ -1,16 +1,18 @@
 package com.example.tarotaboutU.src.diary;
 
-import com.example.tarotaboutU.src.diary.model.GetDiaryRes;
-import com.example.tarotaboutU.src.diary.model.PatchDiaryReq;
-import com.example.tarotaboutU.src.diary.model.PostDiaryReq;
-import com.example.tarotaboutU.src.diary.model.PostDiaryRes;
+import com.example.tarotaboutU.config.BaseException;
+import com.example.tarotaboutU.config.BaseResponse;
+import com.example.tarotaboutU.src.diary.model.*;
 import com.example.tarotaboutU.src.inventory.model.GetTarotsPickedByUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
+
+import static com.example.tarotaboutU.config.BaseResponseStatus.DATABASE_ERROR;
 
 @Repository
 public class DiaryDao {
@@ -21,14 +23,19 @@ public class DiaryDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public int insertDiary(int userId, PostDiaryReq postDiaryReq) {
-        String insertDiaryQuery = "INSERT INTO diary (user_id, create_date, title, content, status) VALUES(?, ?, ?, ?, ?) ";
+    public int insertDiary(int userId, boolean tarotExist, PostDiaryReq postDiaryReq) {
+        String insertDiaryQuery = "INSERT INTO diary (user_id, create_date, title, content, status, one_or_set, tarot_id, set_id, question_id) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ";
         Object[] insertDiaryParam = new Object[]{
                 userId,
                 postDiaryReq.getCreateDate(),
                 postDiaryReq.getTitle(),
                 postDiaryReq.getContent(),
                 "ACTIVE",
+                postDiaryReq.getOneOrSet(),
+                postDiaryReq.getTarotId(),
+                postDiaryReq.getSetId(),
+                postDiaryReq.getQuestionId()
         };
         this.jdbcTemplate.update(insertDiaryQuery,insertDiaryParam);
         String lastInsertIdxQuery = "select last_insert_id()";
@@ -37,18 +44,28 @@ public class DiaryDao {
     }
 
     public List<GetDiaryRes> selectDiary(int userId){
-        String selectDiaryQuery = "SELECT diary_id, user_id, create_date, title, content, status " +
-                "FROM diary WHERE status='ACTIVE' and user_id=?;";
+        String selectDiaryQuery = "select diary_id, user_id, create_date, title, content, status, one_or_set, tarot_id, set_id, question_id\n" +
+                "from diary\n" +
+                "where status='ACTIVE' and user_id=?;";
         int selectDiaryParam=userId;
-        return this.jdbcTemplate.query(selectDiaryQuery,
-                (rs,rowNum) -> new GetDiaryRes(
-                        rs.getInt("diary_id"),
-                        rs.getInt("user_id"),
-                        rs.getDate("create_date"),
-                        rs.getString("title"),
-                        rs.getString("content"),
-                        rs.getString("status")
-                ), selectDiaryParam);
+        try {
+            return this.jdbcTemplate.query(selectDiaryQuery,
+                    (rs, rowNum) -> new GetDiaryRes(
+                            rs.getInt("diary_id"),
+                            rs.getInt("user_id"),
+                            rs.getDate("create_date"),
+                            rs.getString("title"),
+                            rs.getString("content"),
+                            rs.getString("status"),
+                            rs.getString("one_or_set"),
+                            rs.getInt("tarot_id"),
+                            rs.getInt("set_id"),
+                            rs.getInt("question_id")
+                    ), selectDiaryParam);
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("e = " + e);
+            return null;
+        }
     }
 
     public int checkUserExist(int userId){

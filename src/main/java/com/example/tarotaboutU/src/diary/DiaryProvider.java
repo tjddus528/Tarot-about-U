@@ -34,10 +34,12 @@ public class DiaryProvider {
             return getDiaries;
         }
         catch (Exception exception) {
-            System.out.println("exception = " + exception);
+            System.out.println("??exception = " + exception);
             throw new BaseException(DATABASE_ERROR);
+//            return null;
         }
     }
+
     public int checkUserExist(int userIdx) throws BaseException{
         try{
             return diaryDao.checkUserExist(userIdx);

@@ -24,6 +24,13 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
+    /**
+     * 4.1
+     * 보관함 타로결과 저장 API
+     * @param userId
+     * @param postTarotResultReq
+     * @return
+     */
     @ResponseBody
     @PostMapping("/result/{userId}")
     public BaseResponse<String> postTarotToInventory(@PathVariable("userId") int userId, @RequestBody PostTarotResultReq postTarotResultReq){
@@ -35,6 +42,13 @@ public class InventoryController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 4.2
+     * 저장한 타로결과 리스트 조회 API
+     * @param userId
+     * @return
+     */
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<GetTarotsPickedByUser>> getInventoryList(@RequestParam int userId){
@@ -46,6 +60,14 @@ public class InventoryController {
         }
     }
 
+    /**
+     * 4.3
+     * 타로결과 리스트 조회(question 1, 2, 3)
+     * @param userId
+     * @param questionId
+     * @param date
+     * @return
+     */
     @ResponseBody
     @GetMapping("/tarot/{userId}")
     public BaseResponse<List<GetTarotListRes>> getTarotList(@PathVariable("userId") int userId, @RequestParam int questionId, Date date){
@@ -56,6 +78,14 @@ public class InventoryController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 4.4
+     * 세트결과 리스트 조회(question 4)
+     * @param userId
+     * @param date
+     * @return
+     */
     @ResponseBody
     @GetMapping("/set/{userId}")
     public BaseResponse<List<GetSetListRes>> getTarotList(@PathVariable("userId") int userId, @RequestParam Date date){
@@ -66,6 +96,14 @@ public class InventoryController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 4.5
+     * 타로 결과 삭제 API
+     * @param userId
+     * @param pickId
+     * @return
+     */
     @ResponseBody
     @PatchMapping("/{pickId}/status")
     public BaseResponse<String> deleteTarotResult(@RequestParam int userId, @PathVariable("pickId") int pickId) {

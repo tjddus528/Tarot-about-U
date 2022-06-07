@@ -40,6 +40,11 @@ public class CardController {
         }
     }
 
+    /**
+     * 2.2
+     * 전체 타로세트(3장) 조회 API
+     * @return
+     */
     @ResponseBody
     @GetMapping("/setlist") // (GET) 127.0.0.1:9000/cards/set
     public BaseResponse<List<GetCardSetRes>> getCardSetList() {
@@ -52,6 +57,7 @@ public class CardController {
     }
 
     /**
+     * 2.3
      * 특정 카드1장 조회
      * @param tarotId 타로아이디
      * @return 타로카드1장 결과
@@ -71,6 +77,7 @@ public class CardController {
     }
 
     /**
+     * 2.4
      * 특정 카드3장 조회
      * @param setId 타로세트 아이디
      * @return 타로3장 결과

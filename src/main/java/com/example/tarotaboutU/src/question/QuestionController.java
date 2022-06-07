@@ -23,8 +23,8 @@ public class QuestionController {
     }
 
     /**
-     * 2.1
-     * 전체 타로카드 조회 API
+     * 3.1
+     * 질문 리스트 조회 API
      * GET
      */
     @ResponseBody

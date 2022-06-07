@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class PostDiaryRes {
-    private int diaryId;
-    private int userId;
+public class SetResult {
+    private int setId;
+    private Object setInfo;
+    private String setSummary;
+    private String mindTarot;
 }

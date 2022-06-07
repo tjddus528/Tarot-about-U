@@ -22,9 +22,9 @@ public class DiaryService {
         this.diaryProvider = diaryProvider;
         this.diaryDao = diaryDao;
     }
-    public PostDiaryRes createDiary(int userId, PostDiaryReq postDiaryReq) throws BaseException {
+    public PostDiaryRes createDiary(int userId, boolean tarotExist, PostDiaryReq postDiaryReq) throws BaseException {
         try{
-            int diaryId = diaryDao.insertDiary(userId, postDiaryReq);
+            int diaryId = diaryDao.insertDiary(userId, tarotExist, postDiaryReq);
             return new PostDiaryRes(diaryId, userId);
         }
         catch (Exception exception) {

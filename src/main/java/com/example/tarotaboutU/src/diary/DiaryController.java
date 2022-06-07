@@ -27,19 +27,36 @@ public class DiaryController {
         this.diaryService = diaryService;
     }
 
+    /**
+     * 5.1
+     * 다이어리 생성 API
+     * @param postDiaryReq
+     * @return
+     */
     @ResponseBody
     @PostMapping("")
     public BaseResponse<PostDiaryRes> postDiary(@RequestBody PostDiaryReq postDiaryReq) {
         try{
-            if(postDiaryReq.getContent().length() > 450) {
+            if(postDiaryReq.getContent().length() > 1000) {
                 return new BaseResponse<>(BaseResponseStatus.POST_POSTS_INVALID_CONTENTS);
             }
-            PostDiaryRes postDiaryRes = diaryService.createDiary(postDiaryReq.getUserId(), postDiaryReq);
+            boolean tarotExist = true;
+            if(postDiaryReq.getTarotId() == 0 && postDiaryReq.getSetId()==0) {
+                tarotExist = false;
+            }
+            PostDiaryRes postDiaryRes = diaryService.createDiary(postDiaryReq.getUserId(), tarotExist, postDiaryReq);
             return new BaseResponse<>(postDiaryRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 5.2
+     * 다이어리 조회 API
+     * @param userId
+     * @return
+     */
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<GetDiaryRes>> getPosts(@RequestParam int userId) {
@@ -50,6 +67,14 @@ public class DiaryController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 5.3
+     * 다이어리 수정 API
+     * @param diaryId
+     * @param patchDiaryReq
+     * @return
+     */
     @ResponseBody
     @PatchMapping("{diaryId}")
     public BaseResponse<String> modifyDiary(@PathVariable("diaryId") int diaryId, @RequestBody PatchDiaryReq patchDiaryReq) {
@@ -66,6 +91,13 @@ public class DiaryController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 5.4
+     * 다이어리 삭제 API
+     * @param diaryId
+     * @return
+     */
     @ResponseBody
     @PatchMapping("/{diaryId}/status")
     public BaseResponse<String> deleteDiary(@PathVariable("diaryId") int diaryId) {
